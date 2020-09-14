@@ -14,7 +14,7 @@ class JsonDownloader implements DownloadInterface
         $this->validateParams($params);
 
         $page    = $params['page'];
-        $perPage = $params['perPage'];
+        $perPage = $params['page_size'];
 
         $data = $dataRepository->get($this->offset($page, $perPage), $perPage);
 
