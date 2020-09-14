@@ -5,6 +5,10 @@ namespace Classes;
 class CsvDownloader implements DownloadInterface
 {
 
+    /**
+     * @param DataRepository $dataRepository
+     * @param array $params
+     */
     public function download(DataRepository $dataRepository, array $params = [])
     {
         header("Content-Disposition: attachment; filename=test.csv;");

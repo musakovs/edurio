@@ -4,8 +4,6 @@ namespace Classes;
 
 class JsonDownloader implements DownloadInterface
 {
-    private $perPage = 50;
-
     /**
      * @param DataRepository $dataRepository
      * @param array $params
@@ -15,14 +13,22 @@ class JsonDownloader implements DownloadInterface
     {
         $this->validateParams($params);
 
-        $data = $dataRepository->get($this->offset($params['page']), $this->perPage);
+        $page    = $params['page'];
+        $perPage = $params['perPage'];
+
+        $data = $dataRepository->get($this->offset($page, $perPage), $perPage);
 
         echo json_encode($data);
     }
 
-    private function offset(int $page): int
+    /**
+     * @param int $page
+     * @param int $perPage
+     * @return int
+     */
+    private function offset(int $page, int $perPage): int
     {
-        return $this->perPage * ($page - 1);
+        return $perPage * ($page - 1);
     }
 
     /**
@@ -33,10 +39,18 @@ class JsonDownloader implements DownloadInterface
     {
         if (
             !isset($params['page'])
-            || !is_numeric($params['page'])
+            || !is_int($params['page'])
             || $params['page'] < 1
         ) {
             throw new \Exception('Invalid page');
+        }
+
+        if (
+            !isset($params['page_size'])
+            || !is_int($params['page_size'])
+            || $params['page_size'] < 1
+        ) {
+            throw new \Exception('Invalid page size');
         }
     }
 }

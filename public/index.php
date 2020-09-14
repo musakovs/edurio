@@ -2,6 +2,11 @@
 
 require_once '../boot.php';
 
+/**
+ * @param string $uri
+ * @return mixed|void
+ * @throws Exception
+ */
 function runApp(string $uri)
 {
     switch (explode('?', $uri)[0]) {

@@ -14,6 +14,15 @@ class Db
      */
     private static $instance = null;
 
+    /**
+     * Db constructor.
+     * @param string $db
+     * @param string $host
+     * @param string $port
+     * @param string $driver
+     * @param string $username
+     * @param string $psw
+     */
     private function __construct(string $db, string $host, string $port, string $driver, string $username, string $psw)
     {
         $dsn = $driver . ':dbname=' . $db . ';host=' . $host . ':'.$port;
@@ -21,6 +30,15 @@ class Db
         self::$instance = $this;
     }
 
+    /**
+     * @param string $db
+     * @param string $host
+     * @param string $port
+     * @param string $driver
+     * @param string $username
+     * @param string $psw
+     * @return static
+     */
     public static function instance(string $db = '', string $host = '', string $port = '', string $driver = '', string $username = '', string $psw = ''): self
     {
         if (is_null(self::$instance)) {
