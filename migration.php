@@ -24,18 +24,14 @@ $connection->exec("CREATE FUNCTION tmpInsert ()
         SET i = 1;
 
         label1: WHILE i <= 1000000 DO
-            insert into test1 (a, b, c) VALUES (i, mod(i,3), mod(i,5));
+            insert into test (a, b, c) VALUES (i, mod(i,3), mod(i,5));
                 SET i = i + 1;
             END WHILE label1;
 
         RETURN i;
 
-    END;
+    END;");
 
-    select tmpInsert();
-
-    drop function tmpInsert;
-
-");
+$connection->exec('select tmpInsert()');
 
 print_r($connection->errorInfo());
