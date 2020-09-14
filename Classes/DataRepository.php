@@ -2,7 +2,7 @@
 
 namespace Classes;
 
-class DataRepository
+class DataRepository implements DataProviderInterface
 {
     /**
      * @var Db
@@ -23,7 +23,7 @@ class DataRepository
      * @param int $limit
      * @return array
      */
-    public function get(int $offset, int $limit)
+    public function get(int $offset, int $limit): array
     {
         return $this->db
             ->getConnection()

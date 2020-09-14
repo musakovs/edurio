@@ -9,7 +9,7 @@ class JsonDownloader implements DownloadInterface
      * @param array $params
      * @throws \Exception
      */
-    public function download(DataRepository $dataRepository, array $params = [])
+    public function download(DataProviderInterface $dataRepository, array $params = [])
     {
         $this->validateParams($params);
 

@@ -5,9 +5,9 @@ namespace Classes;
 interface DownloadInterface
 {
     /**
-     * @param DataRepository $dataRepository
+     * @param DataProviderInterface $dataRepository
      * @param array $params
      * @return mixed
      */
-    public function download(DataRepository $dataRepository, array $params = []);
+    public function download(DataProviderInterface $dataRepository, array $params = []);
 }

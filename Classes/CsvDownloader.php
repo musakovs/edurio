@@ -6,10 +6,11 @@ class CsvDownloader implements DownloadInterface
 {
 
     /**
-     * @param DataRepository $dataRepository
+     * @param DataProviderInterface $dataRepository
      * @param array $params
+     * @return mixed|void
      */
-    public function download(DataRepository $dataRepository, array $params = [])
+    public function download(DataProviderInterface $dataRepository, array $params = [])
     {
         header("Content-Disposition: attachment; filename=test.csv;");
         header("Content-Type: csv");
