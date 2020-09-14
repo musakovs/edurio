@@ -21,7 +21,7 @@ class Db
         self::$instance = $this;
     }
 
-    public static function instance(string $db, string $host = '', string $port = '', string $driver = '', string $username = '', string $psw = ''): self
+    public static function instance(string $db = '', string $host = '', string $port = '', string $driver = '', string $username = '', string $psw = ''): self
     {
         if (is_null(self::$instance)) {
             self::$instance = new self($db, $host, $port, $driver, $username, $psw);

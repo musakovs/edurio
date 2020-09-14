@@ -4,15 +4,17 @@ require_once 'boot.php';
 
 $connection = \Classes\Db::instance()->getConnection();
 
-$connection->query("
-begin;
-    CREATE TABLE test (
+$connection->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );//Error Handling
+
+$connection->exec("
+CREATE TABLE test (
         a int,
         b tinyint,
         c tinyint
     ) ENGINE=InnoDB
+    ");
 
-    CREATE FUNCTION tmpInsert ()
+$connection->exec("CREATE FUNCTION tmpInsert ()
         RETURNS INT DETERMINISTIC
 
     BEGIN
@@ -33,5 +35,7 @@ begin;
     select tmpInsert();
 
     drop function tmpInsert;
-commit;
+
 ");
+
+print_r($connection->errorInfo());

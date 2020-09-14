@@ -4,16 +4,18 @@ require_once '../boot.php';
 
 function runApp(string $uri)
 {
-    switch ($uri) {
+    switch (explode('?', $uri)[0]) {
         case '/dbs/foo/tables/source/csv':
-            echo 'csv';
+            $class = \Classes\CsvDownloader::class;
             break;
         case '/dbs/foo/tables/source/json':
-            echo 'json';
+            $class = \Classes\JsonDownloader::class;
             break;
         default:
             throw new Exception('route not found');
     }
+
+    return (new $class())->download(new \Classes\DataRepository(\Classes\Db::instance()), $_GET);
 }
 
 try {
