@@ -13,8 +13,8 @@ class JsonDownloader implements DownloadInterface
     {
         $this->validateParams($params);
 
-        $page    = $params['page'];
-        $perPage = $params['page_size'];
+        $page    = (int)$params['page'];
+        $perPage = (int)$params['page_size'];
 
         $data = $dataRepository->get($this->offset($page, $perPage), $perPage);
 
@@ -39,7 +39,7 @@ class JsonDownloader implements DownloadInterface
     {
         if (
             !isset($params['page'])
-            || !is_int($params['page'])
+            || !is_numeric($params['page'])
             || $params['page'] < 1
         ) {
             throw new \Exception('Invalid page');
@@ -47,7 +47,7 @@ class JsonDownloader implements DownloadInterface
 
         if (
             !isset($params['page_size'])
-            || !is_int($params['page_size'])
+            || !is_numeric($params['page_size'])
             || $params['page_size'] < 1
         ) {
             throw new \Exception('Invalid page size');
