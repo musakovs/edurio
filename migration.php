@@ -14,6 +14,8 @@ CREATE TABLE test (
     ) ENGINE=InnoDB
     ");
 
+$connection->exec('alter table test add index search_a(a)');
+
 $connection->exec("CREATE FUNCTION tmpInsert ()
         RETURNS INT DETERMINISTIC
 
